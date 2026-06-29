@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matheusms1 <matheusms1@student.42.fr>      +#+  +:+       +#+        */
+/*   By: matalmei <matalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 13:13:04 by matheusms1        #+#    #+#             */
-/*   Updated: 2026/06/29 10:36:05 by matheusms1       ###   ########.fr       */
+/*   Updated: 2026/06/29 17:18:28 by matalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,14 @@ int	handle_str(va_list args)
 
 int	handle_ptr(va_list args)
 {
-	void			*ptr;
-	unsigned long	addr;
+	void	*ptr;
 
 	ptr = va_arg(args, void *);
-	addr = (unsigned long)ptr;
+	if (!ptr)
+		return (ft_print_str("(nil)"));
 	if (ft_print_str("0x") == -1)
 		return (-1);
-	if (!addr)
-		return (2 + ft_print_char('0'));
-	return (2 + ft_print_nbr(addr, 16, 0));
+	return (2 + ft_print_nbr((unsigned long)ptr, 16, 0));
 }
 
 int	handle_int(va_list args)
